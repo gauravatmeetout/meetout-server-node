@@ -1,39 +1,8 @@
 import * as mongoose from 'mongoose';
 import { BaseModel } from '../libs/baseModel';
+import  UserSchema from "./schemas/user";
 
-const Schema = mongoose.Schema;
-const UserSchema = new Schema({
-    firstName: {
-        type: String,
-        required: 'Enter a first name'
-    },
-    lastName: {
-        type: String,
-        required: 'Enter a last name'
-    },
-    email: {
-        type: String
-    },
-    password: {
-        type: String
-    },
-    phoneNumber: {
-        type: Number
-    },
-    address: {
-        type: String
-    },
-    dob: {
-        type: String
-    },
-    role: {
-        type: String
-    },
-    created_date: {
-        type: Date,
-        default: Date.now
-    }
-});
+
 export const User = mongoose.model('users', UserSchema);
 
 export class UserModel extends BaseModel {

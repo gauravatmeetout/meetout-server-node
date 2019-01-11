@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+<<<<<<< HEAD
     "dev": "ts-node ./src/server.ts",
+=======
+    "dev": "ts-node ./src/server.ts",        
+>>>>>>> 33fde36413204798705a823a211a0a785021f113
     "start": "nodemon ./dist/server.js",
     "prod": "npm run build && npm run start"
   },

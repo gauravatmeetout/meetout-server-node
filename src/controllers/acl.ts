@@ -13,7 +13,7 @@ export class ACLController extends BaseController {
     }
 
     public async insertRole(req: Request, res: Response) {
-        let role= await this.aclModel.insertRole(req.body)
+        let role = await this.aclModel.insertRole(req.body);
         res.json(role);
     }
 
@@ -28,8 +28,13 @@ export class ACLController extends BaseController {
     }
 
     public async insertPermission(req: Request, res: Response) {
-        await this.aclModel.insertPermission(req.body)
-        res.json(req.body);
+        var response={};
+        if (typeof req.body.roles != "undefined") {
+            response = await this.aclModel.insertPermission(req.body, req.body.roles);
+        } else {
+            response = { "msg": "Please select a role" };
+        }
+        res.json(response);
     }
 
     public async getPermission(req: Request, res: Response) {

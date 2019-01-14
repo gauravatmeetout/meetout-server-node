@@ -27,9 +27,20 @@ export class ACLModel extends BaseModel {
         return Role.findOne({ slug: slug });
     }
 
-    public insertPermission(permission) {
+    public insertPermission(permission, roleAr = []) {
         let permissionObj = new Permission(permission);
+        this.addPermissionToRole(roleAr,permissionObj);
         return permissionObj.save();
+    }
+
+    public addPermissionToRole(roleAr, permission) {
+        roleAr.forEach(async roleSlug => {
+            let role = await Role.findOne({ slug: roleSlug });
+            if (role.permissions.indexOf(permission.slug) < 0) {
+                role.permissions.push(permission.slug);
+                role.save();
+            }
+        });
     }
 
     public getPermission(filter) {
